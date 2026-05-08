@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uKrdUqtpmbs=",
+  "dgSpecHash": "K4rsVrNYmzc=",
   "success": true,
-  "projectFilePath": "D:\\ASP.NET Core\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
+  "projectFilePath": "D:\\ASP.NET-Core\\GameStore\\GameStore.Api\\GameStore.Api.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
