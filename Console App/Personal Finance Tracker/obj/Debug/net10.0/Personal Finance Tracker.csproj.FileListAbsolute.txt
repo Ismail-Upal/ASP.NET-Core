@@ -1,0 +1,14 @@
+D:\ASP.NET Core\Console App\Personal Finance Tracker\bin\Debug\net10.0\Personal Finance Tracker.exe
+D:\ASP.NET Core\Console App\Personal Finance Tracker\bin\Debug\net10.0\Personal Finance Tracker.deps.json
+D:\ASP.NET Core\Console App\Personal Finance Tracker\bin\Debug\net10.0\Personal Finance Tracker.runtimeconfig.json
+D:\ASP.NET Core\Console App\Personal Finance Tracker\bin\Debug\net10.0\Personal Finance Tracker.dll
+D:\ASP.NET Core\Console App\Personal Finance Tracker\bin\Debug\net10.0\Personal Finance Tracker.pdb
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.GeneratedMSBuildEditorConfig.editorconfig
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.AssemblyInfoInputs.cache
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.AssemblyInfo.cs
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.csproj.CoreCompileInputs.cache
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.dll
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\refint\Personal Finance Tracker.dll
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.pdb
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\Personal Finance Tracker.genruntimeconfig.cache
+D:\ASP.NET Core\Console App\Personal Finance Tracker\obj\Debug\net10.0\ref\Personal Finance Tracker.dll

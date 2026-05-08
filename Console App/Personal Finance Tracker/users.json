@@ -1,0 +1,25 @@
+[
+  {
+    "AccountNumber": "AC1001",
+    "Pin": "123",
+    "Name": "upal",
+    "Email": "upal",
+    "Balance": 20009,
+    "Transactions": [
+      {
+        "Type": 0,
+        "Amount": 23432,
+        "Category": "income",
+        "Description": "sdf",
+        "Date": "2026-05-08T20:24:05.4869511+06:00"
+      },
+      {
+        "Type": 1,
+        "Amount": 3423,
+        "Category": "expenses",
+        "Description": "sdf",
+        "Date": "2026-05-08T20:24:30.4531005+06:00"
+      }
+    ]
+  }
+]
