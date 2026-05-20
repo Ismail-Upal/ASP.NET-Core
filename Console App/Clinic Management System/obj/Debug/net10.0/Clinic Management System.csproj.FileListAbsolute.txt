@@ -1,0 +1,15 @@
+D:\ASP.NET-Core\Console App\Clinic Management System\bin\Debug\net10.0\Clinic Management System.exe
+D:\ASP.NET-Core\Console App\Clinic Management System\bin\Debug\net10.0\Clinic Management System.deps.json
+D:\ASP.NET-Core\Console App\Clinic Management System\bin\Debug\net10.0\Clinic Management System.runtimeconfig.json
+D:\ASP.NET-Core\Console App\Clinic Management System\bin\Debug\net10.0\Clinic Management System.dll
+D:\ASP.NET-Core\Console App\Clinic Management System\bin\Debug\net10.0\Clinic Management System.pdb
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.GeneratedMSBuildEditorConfig.editorconfig
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.AssemblyInfoInputs.cache
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.AssemblyInfo.cs
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.csproj.CoreCompileInputs.cache
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.sourcelink.json
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.dll
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\refint\Clinic Management System.dll
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.pdb
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\Clinic Management System.genruntimeconfig.cache
+D:\ASP.NET-Core\Console App\Clinic Management System\obj\Debug\net10.0\ref\Clinic Management System.dll

@@ -1,0 +1,4 @@
+1. traffic solution : finding optimize route for traffic
+
+2. smartboard : writing will be convert with ai
+ 

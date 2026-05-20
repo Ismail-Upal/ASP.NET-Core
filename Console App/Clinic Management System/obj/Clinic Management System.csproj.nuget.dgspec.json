@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP.NET-Core\\Console App\\Aegis-Bank\\Aegis-Bank.csproj": {}
+    "D:\\ASP.NET-Core\\Console App\\Clinic Management System\\Clinic Management System.csproj": {}
   },
   "projects": {
-    "D:\\ASP.NET-Core\\Console App\\Aegis-Bank\\Aegis-Bank.csproj": {
+    "D:\\ASP.NET-Core\\Console App\\Clinic Management System\\Clinic Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET-Core\\Console App\\Aegis-Bank\\Aegis-Bank.csproj",
-        "projectName": "Aegis-Bank",
-        "projectPath": "D:\\ASP.NET-Core\\Console App\\Aegis-Bank\\Aegis-Bank.csproj",
+        "projectUniqueName": "D:\\ASP.NET-Core\\Console App\\Clinic Management System\\Clinic Management System.csproj",
+        "projectName": "Clinic Management System",
+        "projectPath": "D:\\ASP.NET-Core\\Console App\\Clinic Management System\\Clinic Management System.csproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET-Core\\Console App\\Aegis-Bank\\obj\\",
+        "outputPath": "D:\\ASP.NET-Core\\Console App\\Clinic Management System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
