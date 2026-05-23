@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ASP.NET-Core\\Console App\\Personal Finance Tracker\\Personal Finance Tracker.csproj",
-      "projectName": "Personal Finance Tracker",
-      "projectPath": "D:\\ASP.NET-Core\\Console App\\Personal Finance Tracker\\Personal Finance Tracker.csproj",
+      "projectUniqueName": "D:\\ASP.NET-Core\\Console App\\Bus Ticket Booking & Billing System\\Bus Ticket Booking & Billing System.csproj",
+      "projectName": "Bus Ticket Booking & Billing System",
+      "projectPath": "D:\\ASP.NET-Core\\Console App\\Bus Ticket Booking & Billing System\\Bus Ticket Booking & Billing System.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "D:\\ASP.NET-Core\\Console App\\Personal Finance Tracker\\obj\\",
+      "outputPath": "D:\\ASP.NET-Core\\Console App\\Bus Ticket Booking & Billing System\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
