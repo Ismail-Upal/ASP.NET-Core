@@ -1,4 +1,9 @@
 1. traffic solution : finding optimize route for traffic
 
 2. smartboard : writing will be convert with ai
+
+3. find plantable land and estimate how many trees using ai model
+
+4. Crop Disease Detection App for Small Farmers
  
+5. get location from image for forensics.
