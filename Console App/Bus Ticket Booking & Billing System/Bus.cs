@@ -5,13 +5,22 @@ public class Bus
     public string? CoachNo;
     public string? Class;
     public int Seats;
-    public decimal Price;
+   
+    private List<Schedule> Schedules = new List<Schedule>();
 
-    public Bus(string coachNo, string Class, int seats, int price){
+    public Bus(string coachNo, string Class, int seats){
         BusId = _nextId++;
         CoachNo = coachNo;
         this.Class = Class;
         Seats = seats;
-        Price = price;
+    }
+
+    public List<Schedule> GetSchedules()
+    {
+        return Schedules;
+    }
+    public List<Schedule> SetSchedules()
+    {
+        return Schedules;
     }
 }

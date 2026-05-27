@@ -100,10 +100,17 @@ public static class BusSystem
 
     public static void ShowUsers()
     {
-        Console.WriteLine("Users Table:\nId\tName\tMobile\tEmail");
+        Console.WriteLine("----------- Bus -----------");
+        Console.WriteLine("{0, -5} {1, -20} {2, -15} {3, -25}", "Id", "Name", "Mobile", "Email");
         foreach (var user in Users)
         {
-            Console.WriteLine($"{user.UserId}\t{user.FullName}\t{user.Mobile}\t{user.Email}");
+            Console.WriteLine(
+                "{0, -5} {1, -20} {2, -15} {3, -25}",
+                user.UserId,
+                user.FullName,
+                user.Mobile,
+                user.Email
+            );
         }
         Console.WriteLine();
     }
@@ -136,7 +143,7 @@ public static class BusSystem
         {
             var values = Enum.GetValues<Classes>();
             int n = values.Length;
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 Console.WriteLine($"{i + 1}. {values[i]}");
             }
@@ -163,31 +170,76 @@ public static class BusSystem
             }
         }
 
-        int seats = 0, price = 0;
-        if(busClass is Classes.Economy)
+        int seats = 0;
+        if (busClass is Classes.Economy)
         {
             seats = 35;
-            price = 600;
         }
-        if(busClass is Classes.Business)
+        if (busClass is Classes.Business)
         {
-            seats = 28;
-            price = 1000;
+            seats = 27;
         }
 
-        var bus = new Bus(coachNo, busClass.ToString(), seats, price);
+        var bus = new Bus(coachNo, busClass.ToString(), seats);
         Buses.Add(bus);
         Utility.PrintMessage($"\nBus created successfully.", true);
     }
 
     public static void ShowBuses()
     {
-        Console.WriteLine("Buses Table:\nId\tCouch No.\tClass\tSeats\tPrice");
+        Console.WriteLine("-------- Buses --------");
+        Console.WriteLine("{0,-5} {1,-15} {2,-12} {3,-8}", "Id", "Coach No.", "Class", "Seats");
+        Console.WriteLine(new string('-', 45));
+
         foreach (var bus in Buses)
         {
-            Console.WriteLine($"{bus.BusId}\t{bus.CoachNo}\t{bus.Class}\t{bus.Seats}\ttk: {bus.Price}");
+            Console.WriteLine(
+                "{0,-5} {1,-15} {2,-12} {3,-8}",
+                bus.BusId,
+                bus.CoachNo,
+                bus.Class,
+                bus.Seats
+            );
+        }
+
+        Console.WriteLine();
+    }
+
+
+    public static void CreateSchedule()
+    {
+
+    }
+    public static void ShowSchedules()
+    {
+        Console.WriteLine("\t------- Schedules -------:\n\t");
+        Console.WriteLine(
+            "{0, -5} {1, -20} {2, -20} {3, -10} {4, -10} {5, -10}",
+            "Id", "From", "To", "Date", "Time", "Price"                
+        );
+        Console.WriteLine(new string('-', 45));
+
+        foreach(var bus in Buses)
+        {
+            List<Schedule> schedules = bus.GetSchedules();
+            foreach(Schedule s in schedules)
+            {
+                Console.WriteLine(
+                    "{0, -5} {1, -20} {2, -20} {3, -10} {4, -10} {5, -10}",
+                    bus.BusId,
+                    s.DepartureCity,
+                    s.ArrivalCity,
+                    s.DepartureDate,
+                    s.DepartureTime,
+                    s.TicketPrice
+                );
+            }
         }
         Console.WriteLine();
+    }
+    public static ShowScheduleDetails()
+    {
+        
     }
 }
 
