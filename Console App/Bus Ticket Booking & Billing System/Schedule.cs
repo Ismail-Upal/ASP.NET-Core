@@ -1,18 +1,23 @@
 public class Schedule
 {
+    private static int _nextId = 0;
+    public int ScheduleId;
+    public int BusId;
     public string? DepartureCity;
     public string? ArrivalCity;
     public DateOnly DepartureDate;
     public TimeOnly DepartureTime;
-    public decimal TicketPrice;
-
-    public Schedule(string departureCity, string arrivalCity, DateOnly departureDate, TimeOnly departureTime, decimal ticketPrice)
+    public decimal Fare;
+    
+    public Schedule(string departureCity, string arrivalCity, DateOnly departureDate, TimeOnly departureTime, decimal fare, int busId)
     {
+        ScheduleId = ++_nextId;
         DepartureCity = departureCity;
         ArrivalCity = arrivalCity;
         DepartureDate = departureDate;
         DepartureTime = departureTime;
-        TicketPrice = ticketPrice;
+        Fare = fare;
+        BusId = busId;
     }
     
 

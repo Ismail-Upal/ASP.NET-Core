@@ -3,24 +3,14 @@ public class Bus
     private static int _nextId = 0;
     public int BusId;
     public string? CoachNo;
-    public string? Class;
+    public BusClasses BusClass;
     public int Seats;
    
-    private List<Schedule> Schedules = new List<Schedule>();
-
-    public Bus(string coachNo, string Class, int seats){
+    public Bus(string coachNo, BusClasses busClass, int seats){
         BusId = _nextId++;
         CoachNo = coachNo;
-        this.Class = Class;
+        BusClass = busClass;
         Seats = seats;
     }
 
-    public List<Schedule> GetSchedules()
-    {
-        return Schedules;
-    }
-    public List<Schedule> SetSchedules()
-    {
-        return Schedules;
-    }
 }

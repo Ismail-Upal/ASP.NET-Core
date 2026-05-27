@@ -9,7 +9,7 @@ public static class BusSystem
 {
     private static readonly List<User> Users = new List<User>();
     private static readonly List<Bus> Buses = new List<Bus>();
-    // private List<Schedule> _schedules = new List<Schedule>();
+    private static readonly List<Schedule> Schedules = new List<Schedule>();
 
     public static void CreateUser()
     {
@@ -241,10 +241,13 @@ public static class BusSystem
     {
         
     }
+    public static BookTicket()
+    {
+        
+    }
+    public static ShowUserInvoice(){}
+    public static PayInvoice(){}
+    public static ShowUserTicket(){}
+
 }
 
-public enum Classes
-{
-    Economy,
-    Business
-}
