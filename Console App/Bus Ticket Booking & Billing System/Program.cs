@@ -9,11 +9,11 @@ class Program
 
         while (true)
         {
-            MainMenu.Menu();
             int option;
             while (true)
             {
-                Console.Write("\nChoose option: ");
+                MainMenu.Menu();
+                Console.Write("\nChoose option (1 to 12): ");
                 string? input = Console.ReadLine();
                 if (int.TryParse(input, out option))
                 {
@@ -46,9 +46,11 @@ class Program
                     break;
 
                 case 5:
+                    BusSystem.CreateSchedule();
                     break;
 
                 case 6:
+                    BusSystem.ShowSchedules();
                     break;
 
                 case 7:

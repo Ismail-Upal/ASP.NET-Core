@@ -8,17 +8,15 @@ public class Schedule
     public DateOnly DepartureDate;
     public TimeOnly DepartureTime;
     public decimal Fare;
-    
-    public Schedule(string departureCity, string arrivalCity, DateOnly departureDate, TimeOnly departureTime, decimal fare, int busId)
+
+    public Schedule(int busId, string departureCity, string arrivalCity, DateOnly departureDate, TimeOnly departureTime, decimal fare)
     {
+        BusId = busId;
         ScheduleId = ++_nextId;
         DepartureCity = departureCity;
         ArrivalCity = arrivalCity;
         DepartureDate = departureDate;
         DepartureTime = departureTime;
         Fare = fare;
-        BusId = busId;
     }
-    
-
 }

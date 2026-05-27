@@ -4,7 +4,7 @@ public static class Utility
 {
     public static void Welcome()
     {
-        Console.Clear();
+        // Console.Clear();
         Console.Title = "My Bus Booking & Billing System";
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("\n\n----------- Welcome to My Bus Ticket Booking App -----------");
@@ -12,8 +12,7 @@ public static class Utility
     }
     public static void PressEnterToContinue()
     {
-        Console.Write("\n\nPress Enter to continue...");
-        Console.ReadLine();
+        Console.WriteLine("\n\nPress Enter to continue...");
         Console.ReadLine();
     }
 
