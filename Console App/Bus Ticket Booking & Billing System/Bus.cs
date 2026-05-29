@@ -1,6 +1,6 @@
 public class Bus
 {
-    private static int _nextId = 0;
+    private static int _nextId = 1;
     public int BusId;
     public string? CoachNo;
     public BusClasses BusClass;

@@ -54,6 +54,7 @@ class Program
                     break;
 
                 case 7:
+                    BusSystem.ShowScheduleDetails();
                     break;
 
                 case 8:

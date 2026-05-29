@@ -1,9 +1,11 @@
+using System.Data;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
 using Microsoft.VisualBasic;
 
 public static class BusSystem
@@ -208,21 +210,30 @@ public static class BusSystem
 
     public static void CreateSchedule()
     {
+        int row = 0, col = 0;
         if (Buses.Count == 0)
         {
             Utility.PrintMessage("No Bus in the fleet. Create Bus First.", false);
             return;
         }
 
-        int BusId = 0;
+        int BusId;
         while (true)
         {
             Console.Write("Bus Id: ");
             string? input = Console.ReadLine();
             if (int.TryParse(input, out BusId))
             {
-                if (Buses.FirstOrDefault(b => b.BusId == BusId) != null)
+                Bus? bus = Buses.FirstOrDefault(b => b.BusId == BusId);
+                if (bus != null)
                 {
+                    if(bus.BusClass == BusClasses.Economy){
+                        row = 9;col = 4;
+                    }
+                    else
+                    {
+                        row = 9; col = 3;
+                    }
                     break;
                 }
                 else
@@ -293,15 +304,16 @@ public static class BusSystem
         while (true)
         {
             Console.Write("Fare: ");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
             if(decimal.TryParse(input, out Fare))
             {
                 break;
             }
             else Utility.PrintMessage("invalid fare. try again.", false);
         }
-
+        
         Schedule NewSchedule = new Schedule(BusId, DepartureCity, ArrivalCity, DepartureDate, DepartureTime, Fare);
+        NewSchedule.GenerateSeat(row, col);
         Schedules.Add(NewSchedule);
         Utility.PrintMessage("Schedule added successfully", true);
     }
@@ -309,9 +321,9 @@ public static class BusSystem
     
     public static void ShowSchedules()
     {
-        Console.WriteLine("\t------- Schedules -------:\n\t");
+        Console.WriteLine("------- Schedules -------");
         Console.WriteLine(
-            "{0, -5} {0, -5} {1, -15} {2, -15} {3, -10} {4, -10} {5, -10}",
+            "{0, -5} {1, -5} {2, -15} {3, -15} {4, -10} {5, -10} {6, -10}",
             "Id", "BusId", "From", "To", "Date", "Time", "Price"
         );
         Console.WriteLine(new string('-', 65));
@@ -319,7 +331,7 @@ public static class BusSystem
         foreach (var schedule in Schedules)
         {   
             Console.WriteLine(
-                "{0, -5} {0, -5} {1, -15} {2, -15} {3, -10} {4, -10} {5, -10}",
+                "{0, -5} {1, -5} {2, -15} {3, -15} {4, -10} {5, -10} {6, -10}",
                 schedule.ScheduleId,
                 schedule.BusId,
                 schedule.DepartureCity,
@@ -335,56 +347,158 @@ public static class BusSystem
     public static void ShowScheduleDetails()
     {
         Schedule? schedule;
-        Bus? Bus;
+        Bus? bus;
 
-        int ScheduleId;
+        int scheduleId;
+
         while (true)
         {
             Console.Write("Schedule Id: ");
             string? input = Console.ReadLine();
-            if(int.TryParse(input, out ScheduleId))
+
+            if (!int.TryParse(input, out scheduleId))
             {
-                schedule = Schedules.FirstOrDefault(s => s.ScheduleId == ScheduleId);
-            
-                if(schedule != null)
+                Utility.PrintMessage("Invalid id. Try again.", false);
+                continue;
+            }
+
+            schedule = Schedules.FirstOrDefault(s => s.ScheduleId == scheduleId);
+
+            if (schedule == null)
+            {
+                Utility.PrintMessage("Invalid id. Try again.", false);
+                continue;
+            }
+
+            bus = Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
+
+            if (bus == null)
+            {
+                Utility.PrintMessage("Bus not found for this schedule.", false);
+                return;
+            }
+
+            break;
+        }
+
+        Console.WriteLine("---- Schedule Details -----");
+        Console.WriteLine($"Schedule Id : {schedule.ScheduleId}");
+        Console.WriteLine($"Bus Id : {bus.BusId} | Coach No: {bus.CoachNo} | Type: {bus.BusClass}");
+        Console.WriteLine($"From: {schedule.DepartureCity} To: {schedule.ArrivalCity}");
+        Console.WriteLine($"Date: {schedule.DepartureDate} Time: {schedule.DepartureTime}");
+        Console.WriteLine($"Fare: {schedule.Fare}");
+        Console.WriteLine($"Total Seats: {schedule.Seats?.Length ?? 0}");
+
+        if (schedule.Seats == null)
+        {
+            Console.WriteLine("Seats not generated.");
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Seat Layout (X = Booked, [ ] = available):");
+
+        int row = schedule.Seats.GetLength(0);
+        int col = schedule.Seats.GetLength(1);
+
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                var seat = schedule.Seats[i, j];
+                char status = seat.IsBooked ? 'X' : ' ';
+
+                Console.Write($"[{status}:{seat.SeatNo}]");
+                if(bus.BusClass == BusClasses.Economy && j == 1) Console.Write("\t\t");
+                if(bus.BusClass == BusClasses.Business && j == 0) Console.Write("\t\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    public static void BookTicket()
+    {
+        int UserId;
+        while (true)
+        {
+            Console.Write("Enter user ID: ");
+            string? input = Console.ReadLine();
+            if(int.TryParse(input, out UserId))
+            {
+                if(Users.FirstOrDefault(u => u.UserId == UserId) != null)
                 {
-                    Bus = Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
                     break;
                 }
                 else
                 {
-                    Utility.PrintMessage("Invalid id. try again.", false);
+                    Console.WriteLine("User Id dont exist. try again.");
                 }
             }
             else
             {
-                Utility.PrintMessage("Invalid id. try again.", false);
+                Console.WriteLine("Invalid input.try again.");
+            }
+        }
+        Schedule? schedule;
+        int row, col;
+        int ScheduleId;
+        while (true)
+        {
+            Console.Write("Enter schedule ID: "); 
+            string? input = Console.ReadLine();
+            if(int.TryParse(input, out ScheduleId))
+            {
+                schedule = Schedules.FirstOrDefault(s => s.ScheduleId == ScheduleId);
+                if(schedule != null)
+                {
+                    row = schedule.Seats.GetLength(0);
+                    col = schedule.Seats.GetLength(1);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Schedule Id dont exixt. try again.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. try again.");
+            }
+        }
+        List<string> seats = new List<string>();
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                seats.Add($"{i + 1}{(char)('A' + j)}");
             }
         }
 
-        Console.WriteLine("---- Schedule Details -----");
-        Console.WriteLine($"Schedule Id : {ScheduleId}");
-        Console.WriteLine($"Bus Id : {Bus.BusId} | Coach No: {Bus.CoachNo} | Type: {Bus.BusClass}");
-        Console.WriteLine($"From: {schedule.DepartureCity} To: {schedule.ArrivalCity}"); 
-        Console.WriteLine($"Date: {schedule.DepartureDate} Time: {schedule.DepartureTime}"); 
-        Console.WriteLine($"Taka: {schedule.Fare} Total Seats: {Bus.Seats}"); 
+        string? SeatNo;
+        while (true)
+        {
+            Console.Write("Enter seat number (e.g. 1A, 3C): ");
+            string? input = Console.ReadLine();
+            if(seats.Contains(input) == true)
+            {
+                SeatNo = input;   
+            }
+            else
+            {
+                Console.WriteLine("invalid input. try again.");
+                continue;
+            }
 
-        Console.WriteLine("Seat Layout (X = Booked, [ ] = available):");
-        if(Bus.BusClass == BusClasses.Economy)
-        {
-            for(int )
-        }
-        else
-        {
-            
+            int i = (int)(SeatNo[0] - '0') - 1;
+            int j = SeatNo[1] - 'A';
+
+            if(schedule.Seats[i, j].IsBooked)
+            {
+                Console.WriteLine("Seat is already booked. choose another seat.");
+                continue;
+            }
+               
         }
     }
-
-    // }
-    // public static BookTicket()
-    // {
-
-    // }
     // public static ShowUserInvoice() { }
     // public static PayInvoice() { }
     // public static ShowUserTicket() { }
