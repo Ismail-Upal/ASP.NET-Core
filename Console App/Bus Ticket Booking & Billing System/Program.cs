@@ -1,6 +1,4 @@
 ﻿
-using System.Net.WebSockets;
-
 class Program
 {
     public static void Main(string[] args)
@@ -17,7 +15,7 @@ class Program
                 string? input = Console.ReadLine();
                 if (int.TryParse(input, out option))
                 {
-                    if (option > 12)
+                    if (option < 1 || option > 12)
                     {
                         Utility.PrintMessage("Invalid option. Try again.", false);
                     }

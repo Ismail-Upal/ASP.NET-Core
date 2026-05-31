@@ -1,14 +1,4 @@
-using System.Collections.Frozen;
-using System.Data;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters;
-using Microsoft.VisualBasic;
-
+using System.Linq;
 public static class BusSystem
 {
     private static List<User> Users = new List<User>();
@@ -69,7 +59,7 @@ public static class BusSystem
             string? input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input))
             {
-                Utility.PrintMessage("Email is requird. Try again.\n", false);
+                Utility.PrintMessage("Email is required. Try again.\n", false);
                 continue;
             }
 
@@ -92,7 +82,7 @@ public static class BusSystem
 
         var newUser = new User(fullName, mobile, email);
         Users.Add(newUser);
-        Utility.PrintMessage($"\nUser created successfully.\nWelcom Mr/Ms. {fullName}", true);
+        Utility.PrintMessage($"\nUser created successfully.\nWelcome Mr/Ms. {fullName}", true);
     }
 
     private static bool IsAllDigits(string s)
@@ -145,11 +135,6 @@ public static class BusSystem
         }
 
         BusClasses busClass;
-        int seats = 0;
-
-
-
-
         int option = 0;
         while (true)
         {
@@ -159,7 +144,7 @@ public static class BusSystem
             string? input = Console.ReadLine();
             if (int.TryParse(input, out option))
             {
-                if (option < 0 || option > 2)
+                if (option < 1 || option > 2)
                 {
                     Utility.PrintMessage("Invalid Option. Try again", false);
                 }
@@ -174,15 +159,13 @@ public static class BusSystem
         if (option == 1)
         {
             busClass = BusClasses.Economy;
-            seats = 35;
         }
         else
         {
             busClass = BusClasses.Business;
-            seats = 28;
         }
 
-        var bus = new Bus(coachNo, busClass, seats);
+        var bus = new Bus(coachNo, busClass);
         Buses.Add(bus);
         Utility.PrintMessage($"\nBus created successfully.", true);
     }
@@ -226,14 +209,8 @@ public static class BusSystem
                 Bus? bus = Buses.FirstOrDefault(b => b.BusId == BusId);
                 if (bus != null)
                 {
-                    if (bus.BusClass == BusClasses.Economy)
-                    {
-                        row = 9; col = 4;
-                    }
-                    else
-                    {
-                        row = 9; col = 3;
-                    }
+                    row = bus.Rows;
+                    col = bus.Cols;
                     break;
                 }
                 else
@@ -405,11 +382,11 @@ public static class BusSystem
             for (int j = 0; j < col; j++)
             {
                 var seat = schedule.Seats[i, j];
-                char status = seat.IsPaid ? 'X' : ' ';
+                char status = seat.IsPaid ? 'X' : (seat.IsBooked ? 'B' : ' ');
+                Console.Write($"[{status}:{seat.SeatNo}] ");
 
-                Console.Write($"[{status}:{seat.SeatNo}]");
-                if (bus.BusClass == BusClasses.Economy && j == 1) Console.Write("\t\t");
-                if (bus.BusClass == BusClasses.Business && j == 0) Console.Write("\t\t");
+                if (bus.BusClass == BusClasses.Economy && j == 1) Console.Write("\t");
+                if (bus.BusClass == BusClasses.Business && j == 0) Console.Write("\t");
             }
             Console.WriteLine();
         }
@@ -504,6 +481,7 @@ public static class BusSystem
         Invoice invoice = new Invoice(UserId, ScheduleId, schedule.Fare, seatId);
         Ticket ticket = new Ticket(invoice.InvoiceId, UserId, ScheduleId, seatId, bus.CoachNo, SeatNo);
         invoice.TicketId = ticket.TicketId;
+        schedule.Seats[row, col].IsBooked = true;
 
         Tickets.Add(ticket);
         Invoices.Add(invoice);
@@ -533,7 +511,9 @@ public static class BusSystem
             }
         }
 
-        if (Invoices.FirstOrDefault(i => i.UserId == UserId) == null)
+        var userInvoices = Invoices.Where(i => i.UserId == UserId).ToList();
+
+        if (userInvoices.Count == 0)
         {
             Utility.PrintMessage("No invoices found for this user.", false);
             return;
@@ -541,9 +521,9 @@ public static class BusSystem
         Console.WriteLine("------ Invoices List -----");
         Console.WriteLine("{0, -5} {1, -5} {2, -10} {3, -10} {4, -10} {5, -5}", "ID", "Ticket Id", "Amount", "Date", "Time", "Paid");
 
-        foreach (var invoice in Invoices)
+        foreach (var invoice in userInvoices)
         {
-            string stat = invoice.IsPaid == true ? "Yes" : "No";
+            string stat = invoice.IsPaid ? "Yes" : "No";
             Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -10} {5, -5}",
                 invoice.InvoiceId,
                 invoice.TicketId,
@@ -585,8 +565,12 @@ public static class BusSystem
         }
 
         Schedule? schedule = Schedules.FirstOrDefault(s => s.ScheduleId == invoice.ScheduleId);
+        if(schedule == null)
+        {
+            Utility.PrintMessage("Schedule not found. cant marks seat", false);
+            return;
+        }
         schedule.MarkSeat(invoice.SeatId);
-
         invoice.IsPaid = true;
         Utility.PrintMessage("Invoice Paid succefully", true);
     }
@@ -641,32 +625,22 @@ public static class BusSystem
         }
 
         Console.WriteLine("------ Tickets List -----");
-        Console.WriteLine("{0, -10} {1, -10} {2, -10} {3, -10}", "ID", "Coache No.", "Journey", "Seat");
+        Console.WriteLine("{0, -10} {1, -10} {2, -12} {3, -12} {4, -10}", "ID", "Coach No.", "Date", "Time", "Seat");
 
         foreach (var ticket in tickets)
         {
-            string CoachNo;
-            DateOnly Date;
-            TimeOnly Time;
-            string SeatNo;
-
             Schedule? schedule = Schedules.FirstOrDefault(s => s.ScheduleId == ticket.ScheduleId);
             if (schedule == null)
             {
                 Console.WriteLine("Invalid ticket");
                 return;
             }
-            CoachNo = ticket.CoachNo;
-            Date = schedule.DepartureDate;
-            Time = schedule.DepartureTime;
-            SeatNo = ticket.SeatNo;
-
-            Console.WriteLine("{0, -10} {1, -10} {2, -10} {3, -10}",
+            Console.WriteLine("{0, -10} {1, -10} {2, -12} {3, -12} {4, -10}",
                 ticket.TicketId,
-                CoachNo,
-                Date,
-                Time,
-                SeatNo
+                ticket.CoachNo,
+                schedule.DepartureDate,
+                schedule.DepartureTime,
+                ticket.SeatNo
             );
         }
     }

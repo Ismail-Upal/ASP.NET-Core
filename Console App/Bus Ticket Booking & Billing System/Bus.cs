@@ -1,16 +1,30 @@
 public class Bus
 {
     private static int _nextId = 1;
-    public int BusId;
-    public string? CoachNo;
-    public BusClasses BusClass;
-    public int Seats;
-   
-    public Bus(string coachNo, BusClasses busClass, int seats){
+    public int BusId { get; set; }
+    public string? CoachNo { get; set; }
+    public BusClasses BusClass { get; set; }
+    public int Seats { get; set; }
+    public int Rows { get; set; }
+    public int Cols { get; set; }
+
+    public Bus(string coachNo, BusClasses busClass)
+    {
         BusId = _nextId++;
         CoachNo = coachNo;
         BusClass = busClass;
-        Seats = seats;
-    }
 
+        if (busClass == BusClasses.Economy)
+        {
+            Seats = 35;
+            Rows = 9;
+            Cols = 4;
+        }
+        else 
+        {
+            Seats = 28;
+            Rows = 9;
+            Cols = 3;
+        }
+    }
 }

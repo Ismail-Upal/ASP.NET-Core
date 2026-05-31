@@ -1,15 +1,13 @@
-using System.Linq.Expressions;
-
 public class Ticket
 {
     private static int _nextId = 1;
-    public int SeatId;
-    public int TicketId;
-    public int ScheduleId;
-    public int UserId;
-    public string SeatNo;
-    public string CoachNo;
-    public int InvoiceId;
+    public int TicketId { get; set; }
+    public int UserId { get; set; }
+    public int ScheduleId { get; set; }
+    public int SeatId { get; set; }
+    public string SeatNo { get; set; }
+    public string CoachNo { get; set; }
+    public int InvoiceId { get; set; }
 
     public Ticket(int invoiceId, int userId, int scheduleId, int seatId, string coachNo, string seatNo)
     {
