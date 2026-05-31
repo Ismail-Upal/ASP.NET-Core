@@ -35,4 +35,21 @@ public class Schedule
             }
         }
     }
+
+    public void MarkSeat(int seatId)
+    {
+        int row = Seats.GetLength(0);
+        int col = Seats.GetLength(1);
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                if(Seats[i, j].SeatId == seatId)
+                {
+                    Seats[i, j].IsPaid = true;
+                    Seats[i, j].IsBooked = true;
+                }
+            }
+        }
+    }
 }

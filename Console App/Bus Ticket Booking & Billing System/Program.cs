@@ -58,15 +58,19 @@ class Program
                     break;
 
                 case 8:
+                    BusSystem.BookTicket();
                     break;
 
                 case 9:
+                    BusSystem.ShowUserInvoices();
                     break;
 
                 case 10:
+                    BusSystem.PayInvoice();
                     break;
 
                 case 11:
+                    BusSystem.ShowUserTickets();
                     break;
 
                 case 12:

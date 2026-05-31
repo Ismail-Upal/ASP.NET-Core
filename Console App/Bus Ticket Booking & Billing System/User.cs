@@ -1,6 +1,6 @@
 public class User
 {
-    private static int _nextId = 0;
+    private static int _nextId = 1;
     public int UserId { get; set; }
     public string? FullName { get; set; }
     public string? Mobile { get; set; }
