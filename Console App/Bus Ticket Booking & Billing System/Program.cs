@@ -1,5 +1,4 @@
-﻿
-class Program
+﻿class Program
 {
     public static void Main(string[] args)
     {
@@ -28,59 +27,46 @@ class Program
             switch (option)
             {
                 case 1:
-                    BusSystem.CreateUser();
+                    UserService.CreateUser();
                     break;
-
                 case 2:
-                    BusSystem.ShowUsers();
+                    UserService.ShowUsers();
                     break;
-
                 case 3:
-                    BusSystem.CreateBus();
+                    BusService.CreateBus();
                     break;
-
                 case 4:
-                    BusSystem.ShowBuses();
+                    BusService.ShowBuses();
                     break;
-
                 case 5:
-                    BusSystem.CreateSchedule();
+                    ScheduleService.CreateSchedule();
                     break;
-
                 case 6:
-                    BusSystem.ShowSchedules();
+                    ScheduleService.ShowSchedules();
                     break;
-
                 case 7:
-                    BusSystem.ShowScheduleDetails();
+                    ScheduleService.ShowScheduleDetails();
                     break;
-
                 case 8:
-                    BusSystem.BookTicket();
+                    TicketService.BookTicket();
                     break;
-
                 case 9:
-                    BusSystem.ShowUserInvoices();
+                    InvoiceService.ShowUserInvoices();
                     break;
-
                 case 10:
-                    BusSystem.PayInvoice();
+                    InvoiceService.PayInvoice();
                     break;
-
                 case 11:
-                    BusSystem.ShowUserTickets();
+                    TicketService.ShowUserTickets();
                     break;
-
                 case 12:
                     End = true;
                     break;
             }
 
-            if(End) break;
+            if (End) break;
         }
 
         Utility.Exit();
     }
-
-
 }

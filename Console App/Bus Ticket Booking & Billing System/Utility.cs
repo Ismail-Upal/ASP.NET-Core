@@ -1,4 +1,3 @@
-
 public static class Utility
 {
     public static void Welcome()
@@ -9,6 +8,14 @@ public static class Utility
         Console.WriteLine("\n\n----------- Welcome to My Bus Ticket Booking App -----------");
         PressEnterToContinue();
     }
+
+    public static string? ReadLineOrCancel()
+    {
+        string? input = Console.ReadLine()?.Trim();
+        if(input == "0") input = null;
+        return input;
+    }
+
     public static void PressEnterToContinue()
     {
         Console.WriteLine("\n\nPress Enter to continue...");
