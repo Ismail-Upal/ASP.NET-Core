@@ -7,8 +7,8 @@ public static class BusService
         string? coachNo;
         while (true)
         {
-            Console.Write("Coach No (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Coach No: ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))
@@ -33,8 +33,8 @@ public static class BusService
         {
             Console.WriteLine("1. Economic");
             Console.WriteLine("2. Business");
-            Console.Write("Select BusClass (1 to 2) (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Select BusClass (1 to 2): ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out option))

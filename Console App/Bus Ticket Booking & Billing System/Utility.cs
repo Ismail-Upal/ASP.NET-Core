@@ -9,13 +9,6 @@ public static class Utility
         PressEnterToContinue();
     }
 
-    public static string? ReadLineOrCancel()
-    {
-        string? input = Console.ReadLine()?.Trim();
-        if(input == "0") input = null;
-        return input;
-    }
-
     public static void PressEnterToContinue()
     {
         Console.WriteLine("\n\nPress Enter to continue...");

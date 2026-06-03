@@ -7,8 +7,8 @@ public static class InvoiceService
         int UserId;
         while (true)
         {
-            Console.Write("Enter User Id (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter User Id : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out UserId))
@@ -59,8 +59,8 @@ public static class InvoiceService
         Invoice? invoice;
         while (true)
         {
-            Console.Write("Enter invoice id to pay (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter invoice id to pay : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out InvoiceId))

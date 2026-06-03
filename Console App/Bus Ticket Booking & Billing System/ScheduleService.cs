@@ -14,8 +14,8 @@ public static class ScheduleService
         int row = 0, col = 0;
         while (true)
         {
-            Console.Write("Bus Id (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Bus Id : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out BusId))
@@ -41,8 +41,8 @@ public static class ScheduleService
         string? DepartureCity, ArrivalCity;
         while (true)
         {
-            Console.Write("Departure City (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Departure City : ");
+            string? input = Console.ReadLine();;
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))
@@ -57,8 +57,8 @@ public static class ScheduleService
         }
         while (true)
         {
-            Console.Write("Arrival City (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Arrival City : ");
+            string? input = Console.ReadLine();;
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))
@@ -75,8 +75,8 @@ public static class ScheduleService
         DateOnly DepartureDate;
         while (true)
         {
-            Console.Write("Departure Date (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Departure Date : ");
+            string? input = Console.ReadLine();;
             if (input == null) return;
 
             if (DateOnly.TryParse(input, out DepartureDate))
@@ -88,8 +88,8 @@ public static class ScheduleService
         TimeOnly DepartureTime;
         while (true)
         {
-            Console.Write("Departure Time (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Departure Time : ");
+            string? input = Console.ReadLine();;
             if (input == null) return;
 
             if (TimeOnly.TryParse(input, out DepartureTime))
@@ -102,8 +102,8 @@ public static class ScheduleService
         decimal Fare;
         while (true)
         {
-            Console.Write("Fare (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Fare : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (decimal.TryParse(input, out Fare))
@@ -151,8 +151,8 @@ public static class ScheduleService
         int scheduleId;
         while (true)
         {
-            Console.Write("Schedule Id (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Schedule Id : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (!int.TryParse(input, out scheduleId))

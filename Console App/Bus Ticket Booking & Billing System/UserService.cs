@@ -7,8 +7,8 @@ public static class UserService
         string? fullName;
         while (true)
         {
-            Console.Write("Name (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Name : ");
+            string? input = Console.ReadLine();;
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))
@@ -23,8 +23,8 @@ public static class UserService
         string? mobile;
         while (true)
         {
-            Console.Write("Mobile (11 digits) (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Mobile (11 digits) : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))
@@ -52,8 +52,8 @@ public static class UserService
         string? email;
         while (true)
         {
-            Console.Write("Email (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Email : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (string.IsNullOrWhiteSpace(input))

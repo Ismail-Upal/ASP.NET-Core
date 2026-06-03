@@ -7,8 +7,8 @@ public static class TicketService
         int UserId;
         while (true)
         {
-            Console.Write("Enter user ID (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter user ID : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out UserId))
@@ -33,8 +33,8 @@ public static class TicketService
         int ScheduleId;
         while (true)
         {
-            Console.Write("Enter schedule ID (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter schedule ID : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out ScheduleId))
@@ -69,8 +69,8 @@ public static class TicketService
         string? SeatNo;
         while (true)
         {
-            Console.Write("Enter seat number (e.g. 1A, 3C) (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter seat number (e.g. 1A, 3C): ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (seats.Contains(input))
@@ -114,8 +114,8 @@ public static class TicketService
         int UserId;
         while (true)
         {
-            Console.Write("Enter User Id (or 0 to cancel): ");
-            string? input = Utility.ReadLineOrCancel();
+            Console.Write("Enter User Id : ");
+            string? input = Console.ReadLine();
             if (input == null) return;
 
             if (int.TryParse(input, out UserId))
