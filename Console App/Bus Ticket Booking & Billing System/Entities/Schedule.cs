@@ -10,7 +10,7 @@ public class Schedule
     public TimeOnly DepartureTime { get; set; }
     public decimal Fare { get; set; }
 
-    public Seat[,]? Seats { get; set; }
+    public Seat[,] Seats { get; set; }
 
     public Schedule(int busId, string departureCity, string arrivalCity, DateOnly departureDate, TimeOnly departureTime, decimal fare)
     {

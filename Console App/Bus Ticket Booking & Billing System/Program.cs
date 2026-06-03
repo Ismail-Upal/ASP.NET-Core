@@ -1,8 +1,25 @@
-﻿class Program
+﻿using Interfaces;
+using Repositories;
+
+class Program
 {
     public static void Main(string[] args)
     {
         Utility.Welcome();
+
+        var userRepo = new UserRepository();
+        var busRepo = new BusRepository();
+        var scheduleRepo = new ScheduleRepository();
+        var ticketRepo = new TicketRepository();
+        var invoiceRepo = new InvoiceRepository();
+
+        IUserService userService = new UserService(userRepo);
+        IBusService busService = new BusService(busRepo);
+        IScheduleService scheduleService = new ScheduleService(scheduleRepo, busRepo);
+        ITicketService ticketService = new TicketService(ticketRepo, userRepo, scheduleRepo, busRepo, invoiceRepo);
+        IInvoiceService invoiceService = new InvoiceService(invoiceRepo, scheduleRepo, userRepo);
+
+
 
         while (true)
         {
@@ -27,37 +44,37 @@
             switch (option)
             {
                 case 1:
-                    UserService.CreateUser();
+                    userService.CreateUser();
                     break;
                 case 2:
-                    UserService.ShowUsers();
+                    userService.ShowUsers();
                     break;
                 case 3:
-                    BusService.CreateBus();
+                    busService.CreateBus();
                     break;
                 case 4:
-                    BusService.ShowBuses();
+                    busService.ShowBuses();
                     break;
                 case 5:
-                    ScheduleService.CreateSchedule();
+                    scheduleService.CreateSchedule();
                     break;
                 case 6:
-                    ScheduleService.ShowSchedules();
+                    scheduleService.ShowSchedules();
                     break;
                 case 7:
-                    ScheduleService.ShowScheduleDetails();
+                    scheduleService.ShowScheduleDetails();
                     break;
                 case 8:
-                    TicketService.BookTicket();
+                    ticketService.BookTicket();
                     break;
                 case 9:
-                    InvoiceService.ShowUserInvoices();
+                    invoiceService.ShowUserInvoices();
                     break;
                 case 10:
-                    InvoiceService.PayInvoice();
+                    invoiceService.PayInvoice();
                     break;
                 case 11:
-                    TicketService.ShowUserTickets();
+                    ticketService.ShowUserTickets();
                     break;
                 case 12:
                     End = true;

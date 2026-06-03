@@ -2,7 +2,7 @@ public class Bus
 {
     private static int _nextId = 1;
     public int BusId { get; set; }
-    public string? CoachNo { get; set; }
+    public string CoachNo { get; set; }
     public BusClasses BusClass { get; set; }
     public int Seats { get; set; }
     public int Rows { get; set; }

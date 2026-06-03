@@ -1,8 +1,23 @@
-public static class TicketService
-{
-    public static List<Ticket> Tickets = new List<Ticket>();
+using Interfaces;
+using Repositories;
 
-    public static void BookTicket()
+public class TicketService : ITicketService
+{
+    private readonly TicketRepository _ticketRepo;
+    private readonly UserRepository _userRepo;
+    private readonly ScheduleRepository _scheduleRepo;
+    private readonly BusRepository _busRepo;
+    private readonly InvoiceRepository _invoiceRepo;
+    public TicketService(TicketRepository ticketRepo, UserRepository userRepo, ScheduleRepository scheduleRepo, BusRepository busRepo, InvoiceRepository invoiceRepo)
+    {
+        _ticketRepo = ticketRepo;
+        _userRepo = userRepo;
+        _busRepo = busRepo;
+        _scheduleRepo = scheduleRepo;
+        _invoiceRepo = invoiceRepo;
+    }
+
+    public void BookTicket()
     {
         int UserId;
         while (true)
@@ -13,7 +28,7 @@ public static class TicketService
 
             if (int.TryParse(input, out UserId))
             {
-                if (UserService.Users.FirstOrDefault(u => u.UserId == UserId) != null)
+                if (_userRepo.Users.FirstOrDefault(u => u.UserId == UserId) != null)
                 {
                     break;
                 }
@@ -39,7 +54,7 @@ public static class TicketService
 
             if (int.TryParse(input, out ScheduleId))
             {
-                schedule = ScheduleService.Schedules.FirstOrDefault(s => s.ScheduleId == ScheduleId);
+                schedule = _scheduleRepo.Schedules.FirstOrDefault(s => s.ScheduleId == ScheduleId);
                 if (schedule != null)
                 {
                     row = schedule.Seats.GetLength(0);
@@ -94,22 +109,21 @@ public static class TicketService
             break;
         }
 
-        Bus? bus = BusService.Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
+        Bus? bus = _busRepo.Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
 
         int seatId = schedule.Seats[row, col].SeatId;
         Invoice invoice = new Invoice(UserId, ScheduleId, schedule.Fare, seatId);
         Ticket ticket = new Ticket(invoice.InvoiceId, UserId, ScheduleId, seatId, bus.CoachNo, SeatNo);
         invoice.TicketId = ticket.TicketId;
 
-        // Mark seat as booked immediately
         schedule.Seats[row, col].IsBooked = true;
 
-        Tickets.Add(ticket);
-        InvoiceService.Invoices.Add(invoice);
+        _ticketRepo.Tickets.Add(ticket);
+        _invoiceRepo.Invoices.Add(invoice);
         Utility.PrintMessage($"Ticket Booked successfully\nTicket Id: {ticket.TicketId} | Seat: {schedule.Seats[row, col].SeatNo}\nInvoice Id: {invoice.InvoiceId} | Amount: {schedule.Fare}", true);
     }
 
-    public static void ShowUserTickets()
+    public void ShowUserTickets()
     {
         int UserId;
         while (true)
@@ -120,7 +134,7 @@ public static class TicketService
 
             if (int.TryParse(input, out UserId))
             {
-                if (UserService.Users.FirstOrDefault(u => u.UserId == UserId) != null)
+                if (_userRepo.Users.FirstOrDefault(u => u.UserId == UserId) != null)
                 {
                     break;
                 }
@@ -135,8 +149,8 @@ public static class TicketService
             }
         }
 
-        var paidTickets = Tickets.Where(t => t.UserId == UserId)
-            .Where(t => InvoiceService.Invoices.Any(i => i.TicketId == t.TicketId && i.IsPaid))
+        var paidTickets = _ticketRepo.Tickets.Where(t => t.UserId == UserId)
+            .Where(t => _invoiceRepo.Invoices.Any(i => i.TicketId == t.TicketId && i.IsPaid))
             .ToList();
 
         if (paidTickets.Count == 0)
@@ -145,12 +159,12 @@ public static class TicketService
             return;
         }
 
-        Console.WriteLine("------ Tickets List -----");
-        Console.WriteLine("{0, -10} {1, -10} {2, -12} {3, -12} {4, -10}", "ID", "Coach No.", "Date", "Time", "Seat");
+        Console.WriteLine("\n------ Tickets List -----");
+        Console.WriteLine("{0, -10} {1, -10} {2, -12} {3, -12} {4, -10}", "TicketID", "CoachNo.", "Date", "Time", "Seat");
 
         foreach (var ticket in paidTickets)
         {
-            Schedule? schedule = ScheduleService.Schedules.FirstOrDefault(s => s.ScheduleId == ticket.ScheduleId);
+            Schedule? schedule = _scheduleRepo.Schedules.FirstOrDefault(s => s.ScheduleId == ticket.ScheduleId);
             if (schedule == null)
             {
                 Console.WriteLine("Invalid ticket");

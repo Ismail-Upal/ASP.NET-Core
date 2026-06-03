@@ -1,8 +1,15 @@
-public static class BusService
-{
-    public static List<Bus> Buses = new List<Bus>();
+using Interfaces;
+using Repositories;
 
-    public static void CreateBus()
+public class BusService : IBusService
+{
+    private readonly BusRepository _busRepo;
+    public BusService(BusRepository busRepo)
+    {
+        _busRepo = busRepo;
+    }
+
+    public void CreateBus()
     {
         string? coachNo;
         while (true)
@@ -17,7 +24,7 @@ public static class BusService
                 continue;
             }
 
-            if (Buses.FirstOrDefault(b => b.CoachNo == input) != null)
+            if (_busRepo.Buses.FirstOrDefault(b => b.CoachNo == input) != null)
             {
                 Utility.PrintMessage("This Coach No. is already registered. Try again.", false);
                 continue;
@@ -54,19 +61,19 @@ public static class BusService
         busClass = (option == 1) ? BusClasses.Economy : BusClasses.Business;
 
         var bus = new Bus(coachNo, busClass);
-        Buses.Add(bus);
+        _busRepo.Buses.Add(bus);
         Utility.PrintMessage($"\nBus created successfully.", true);
     }
 
-    public static void ShowBuses()
+    public void ShowBuses()
     {
-        Console.WriteLine("-------- Buses --------");
-        Console.WriteLine("{0,-5} {1,-15} {2,-12} {3,-8}", "Id", "Coach No.", "Class", "Seats");
+        Console.WriteLine("\n-------- Buses --------");
+        Console.WriteLine("{0,-8} {1,-10} {2,-12} {3,-8}", "BusId", "CoachNo.", "Class", "Seats");
 
-        foreach (var bus in Buses)
+        foreach (var bus in _busRepo.Buses)
         {
             Console.WriteLine(
-                "{0,-5} {1,-15} {2,-12} {3,-8}",
+                "{0,-8} {1,-10} {2,-12} {3,-8}",
                 bus.BusId,
                 bus.CoachNo,
                 bus.BusClass,

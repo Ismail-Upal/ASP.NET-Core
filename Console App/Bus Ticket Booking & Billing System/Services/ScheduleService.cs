@@ -1,10 +1,19 @@
-public static class ScheduleService
-{
-    public static List<Schedule> Schedules = new List<Schedule>();
+using Interfaces;
+using Repositories;
 
-    public static void CreateSchedule()
+public class ScheduleService : IScheduleService
+{
+    private readonly ScheduleRepository _scheduleRepo;
+    private readonly BusRepository _busRepo;
+    public ScheduleService(ScheduleRepository scheduleRepo, BusRepository busRepo)
     {
-        if (BusService.Buses.Count == 0)
+        _scheduleRepo = scheduleRepo;
+        _busRepo = busRepo;
+    }
+
+    public void CreateSchedule()
+    {
+        if (_busRepo.Buses.Count == 0)
         {
             Utility.PrintMessage("No Bus in the fleet. Create Bus First.", false);
             return;
@@ -20,7 +29,7 @@ public static class ScheduleService
 
             if (int.TryParse(input, out BusId))
             {
-                Bus? bus = BusService.Buses.FirstOrDefault(b => b.BusId == BusId);
+                Bus? bus = _busRepo.Buses.FirstOrDefault(b => b.BusId == BusId);
                 if (bus != null)
                 {
                     row = bus.Rows;
@@ -115,22 +124,22 @@ public static class ScheduleService
 
         Schedule NewSchedule = new Schedule(BusId, DepartureCity, ArrivalCity, DepartureDate, DepartureTime, Fare);
         NewSchedule.GenerateSeat(row, col);
-        Schedules.Add(NewSchedule);
+        _scheduleRepo.Schedules.Add(NewSchedule);
         Utility.PrintMessage("Schedule added successfully", true);
     }
 
-    public static void ShowSchedules()
+    public void ShowSchedules()
     {
-        Console.WriteLine("------- Schedules -------");
+        Console.WriteLine("\n------- Schedules -------");
         Console.WriteLine(
-            "{0, -5} {1, -5} {2, -15} {3, -15} {4, -10} {5, -10} {6, -10}",
-            "Id", "BusId", "From", "To", "Date", "Time", "Price"
+            "{0, -12} {1, -7} {2, -12} {3, -12} {4, -10} {5, -10} {6, -10}",
+            "ScheduleId", "BusId", "From", "To", "Date", "Time", "Price"
         );
 
-        foreach (var schedule in Schedules)
+        foreach (var schedule in _scheduleRepo.Schedules)
         {
             Console.WriteLine(
-                "{0, -5} {1, -5} {2, -15} {3, -15} {4, -10} {5, -10} {6, -10}",
+                "{0, -12} {1, -7} {2, -12} {3, -12} {4, -10} {5, -10} {6, -10}",
                 schedule.ScheduleId,
                 schedule.BusId,
                 schedule.DepartureCity,
@@ -143,7 +152,7 @@ public static class ScheduleService
         Console.WriteLine();
     }
 
-    public static void ShowScheduleDetails()
+    public void ShowScheduleDetails()
     {
         Schedule? schedule;
         Bus? bus;
@@ -161,7 +170,7 @@ public static class ScheduleService
                 continue;
             }
 
-            schedule = Schedules.FirstOrDefault(s => s.ScheduleId == scheduleId);
+            schedule = _scheduleRepo.Schedules.FirstOrDefault(s => s.ScheduleId == scheduleId);
 
             if (schedule == null)
             {
@@ -169,7 +178,7 @@ public static class ScheduleService
                 continue;
             }
 
-            bus = BusService.Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
+            bus = _busRepo.Buses.FirstOrDefault(b => b.BusId == schedule.BusId);
 
             if (bus == null)
             {
@@ -180,7 +189,7 @@ public static class ScheduleService
             break;
         }
 
-        Console.WriteLine("---- Schedule Details -----");
+        Console.WriteLine("\n---- Schedule Details -----");
         Console.WriteLine($"Schedule Id : {schedule.ScheduleId}");
         Console.WriteLine($"Bus Id : {bus.BusId} | Coach No: {bus.CoachNo} | Type: {bus.BusClass}");
         Console.WriteLine($"From: {schedule.DepartureCity} To: {schedule.ArrivalCity}");
@@ -207,9 +216,9 @@ public static class ScheduleService
                 var seat = schedule.Seats[i, j];
                 char status = seat.IsPaid ? 'X' : (seat.IsBooked ? 'B' : ' ');
 
-                Console.Write($"[{status}:{seat.SeatNo}]");
-                if (bus.BusClass == BusClasses.Economy && j == 1) Console.Write("\t\t");
-                if (bus.BusClass == BusClasses.Business && j == 0) Console.Write("\t\t");
+                Console.Write($"[{status}:{seat.SeatNo}] ");
+                if (bus.BusClass == BusClasses.Economy && j == 1) Console.Write("\t");
+                if (bus.BusClass == BusClasses.Business && j == 0) Console.Write("\t");
             }
             Console.WriteLine();
         }

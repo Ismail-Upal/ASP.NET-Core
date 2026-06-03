@@ -1,8 +1,19 @@
-public static class InvoiceService
-{
-    public static List<Invoice> Invoices = new List<Invoice>();
+using Interfaces;
+using Repositories;
 
-    public static void ShowUserInvoices()
+public class InvoiceService : IInvoiceService
+{
+    private readonly InvoiceRepository _invoiceRepo;
+    private readonly ScheduleRepository _scheduleRepo;
+    private readonly UserRepository _userRepo;
+    public InvoiceService(InvoiceRepository invoiceRepo, ScheduleRepository scheduleRepo, UserRepository userRepo)
+    {
+        _invoiceRepo = invoiceRepo;
+        _scheduleRepo = scheduleRepo;
+        _userRepo = userRepo;
+    }
+
+    public void ShowUserInvoices()
     {
         int UserId;
         while (true)
@@ -13,7 +24,7 @@ public static class InvoiceService
 
             if (int.TryParse(input, out UserId))
             {
-                if (UserService.Users.FirstOrDefault(u => u.UserId == UserId) != null)
+                if (_userRepo.Users.FirstOrDefault(u => u.UserId == UserId) != null)
                 {
                     break;
                 }
@@ -28,7 +39,7 @@ public static class InvoiceService
             }
         }
 
-        var userInvoices = Invoices.Where(i => i.UserId == UserId).ToList();
+        var userInvoices = _invoiceRepo.Invoices.Where(i => i.UserId == UserId).ToList();
 
         if (userInvoices.Count == 0)
         {
@@ -36,13 +47,13 @@ public static class InvoiceService
             return;
         }
 
-        Console.WriteLine("------ Invoices List -----");
-        Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -10} {5, -5}", "ID", "Ticket Id", "Amount", "Date", "Time", "Paid");
+        Console.WriteLine("\n------ Invoices List -----");
+        Console.WriteLine("{0, -10} {1, -10} {2, -10} {3, -10} {4, -10} {5, -5}", "InvoiceId", "TicketId", "Amount", "Date", "Time", "Paid");
 
         foreach (var invoice in userInvoices)
         {
             string stat = invoice.IsPaid ? "Yes" : "No";
-            Console.WriteLine("{0, -5} {1, -10} {2, -10} {3, -10} {4, -10} {5, -5}",
+            Console.WriteLine("{0, -10} {1, -10} {2, -10} {3, -10} {4, -10} {5, -5}",
                 invoice.InvoiceId,
                 invoice.TicketId,
                 invoice.Amount,
@@ -53,7 +64,7 @@ public static class InvoiceService
         }
     }
 
-    public static void PayInvoice()
+    public void PayInvoice()
     {
         int InvoiceId;
         Invoice? invoice;
@@ -65,7 +76,7 @@ public static class InvoiceService
 
             if (int.TryParse(input, out InvoiceId))
             {
-                invoice = Invoices.FirstOrDefault(i => i.InvoiceId == InvoiceId);
+                invoice = _invoiceRepo.Invoices.FirstOrDefault(i => i.InvoiceId == InvoiceId);
                 if (invoice != null)
                 {
                     if (invoice.IsPaid)
@@ -85,7 +96,7 @@ public static class InvoiceService
             }
         }
 
-        Schedule? schedule = ScheduleService.Schedules.FirstOrDefault(s => s.ScheduleId == invoice.ScheduleId);
+        Schedule? schedule = _scheduleRepo.Schedules.FirstOrDefault(s => s.ScheduleId == invoice.ScheduleId);
         if (schedule == null)
         {
             Utility.PrintMessage("Schedule not found. Cannot mark seat.", false);
