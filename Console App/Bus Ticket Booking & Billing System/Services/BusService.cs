@@ -16,7 +16,7 @@ public class BusService : IBusService
         {
             Console.Write("Coach No: ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -42,7 +42,7 @@ public class BusService : IBusService
             Console.WriteLine("2. Business");
             Console.Write("Select BusClass (1 to 2): ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out option))
             {

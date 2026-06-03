@@ -24,7 +24,7 @@ public class TicketService : ITicketService
         {
             Console.Write("Enter user ID : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out UserId))
             {
@@ -50,7 +50,7 @@ public class TicketService : ITicketService
         {
             Console.Write("Enter schedule ID : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out ScheduleId))
             {
@@ -86,7 +86,7 @@ public class TicketService : ITicketService
         {
             Console.Write("Enter seat number (e.g. 1A, 3C): ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (seats.Contains(input))
             {
@@ -98,8 +98,8 @@ public class TicketService : ITicketService
                 continue;
             }
 
-            row = int.Parse(SeatNo.Substring(0, SeatNo.Length - 1)) - 1;
-            col = SeatNo[SeatNo.Length - 1] - 'A';
+            row = (int)(SeatNo[0] - '0') - 1;
+            col = SeatNo[1] - 'A';
 
             if (schedule.Seats[row, col].IsBooked)
             {
@@ -130,7 +130,7 @@ public class TicketService : ITicketService
         {
             Console.Write("Enter User Id : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out UserId))
             {

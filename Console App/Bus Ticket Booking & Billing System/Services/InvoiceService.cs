@@ -20,7 +20,7 @@ public class InvoiceService : IInvoiceService
         {
             Console.Write("Enter User Id : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out UserId))
             {
@@ -72,7 +72,7 @@ public class InvoiceService : IInvoiceService
         {
             Console.Write("Enter invoice id to pay : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out InvoiceId))
             {

@@ -15,9 +15,9 @@ public static class Utility
         Console.ReadLine();
     }
 
-    public static void PrintMessage(string msg, bool success)
+    public static void PrintMessage(string msg, bool ok)
     {
-        if (success)
+        if (ok)
         {
             Console.ForegroundColor = ConsoleColor.Green;
         }
@@ -32,7 +32,6 @@ public static class Utility
 
     public static void Exit()
     {
-        Console.WriteLine("\n\nThanks for using our services");
-        PressEnterToContinue();
+        Console.WriteLine("\n\nThanks for using our services\n\n");
     }
 }

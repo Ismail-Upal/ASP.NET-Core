@@ -25,7 +25,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Bus Id : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (int.TryParse(input, out BusId))
             {
@@ -52,7 +52,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Departure City : ");
             string? input = Console.ReadLine();;
-            if (input == null) return;
+             
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -68,7 +68,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Arrival City : ");
             string? input = Console.ReadLine();;
-            if (input == null) return;
+             
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -86,7 +86,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Departure Date : ");
             string? input = Console.ReadLine();;
-            if (input == null) return;
+             
 
             if (DateOnly.TryParse(input, out DepartureDate))
             {
@@ -99,7 +99,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Departure Time : ");
             string? input = Console.ReadLine();;
-            if (input == null) return;
+             
 
             if (TimeOnly.TryParse(input, out DepartureTime))
             {
@@ -113,7 +113,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Fare : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (decimal.TryParse(input, out Fare))
             {
@@ -162,7 +162,7 @@ public class ScheduleService : IScheduleService
         {
             Console.Write("Schedule Id : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (!int.TryParse(input, out scheduleId))
             {
@@ -195,7 +195,7 @@ public class ScheduleService : IScheduleService
         Console.WriteLine($"From: {schedule.DepartureCity} To: {schedule.ArrivalCity}");
         Console.WriteLine($"Date: {schedule.DepartureDate} Time: {schedule.DepartureTime}");
         Console.WriteLine($"Fare: {schedule.Fare}");
-        Console.WriteLine($"Total Seats: {schedule.Seats?.Length ?? 0}");
+        Console.WriteLine($"Total Seats: {schedule.Seats.Length}");
 
         if (schedule.Seats == null)
         {

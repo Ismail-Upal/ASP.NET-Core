@@ -16,7 +16,7 @@ public class Bus
 
         if (busClass == BusClasses.Economy)
         {
-            Seats = 35;
+            Seats = 37;
             Rows = 9;
             Cols = 4;
         }

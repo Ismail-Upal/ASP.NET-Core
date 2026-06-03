@@ -16,8 +16,7 @@ public class UserService : IUserService
         while (true)
         {
             Console.Write("Name : ");
-            string? input = Console.ReadLine();;
-            if (input == null) return;
+            string? input = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -33,7 +32,7 @@ public class UserService : IUserService
         {
             Console.Write("Mobile (11 digits) : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -62,7 +61,7 @@ public class UserService : IUserService
         {
             Console.Write("Email : ");
             string? input = Console.ReadLine();
-            if (input == null) return;
+             
 
             if (string.IsNullOrWhiteSpace(input))
             {
