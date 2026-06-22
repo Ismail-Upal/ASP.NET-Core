@@ -1,0 +1,6 @@
+@BMI___Health_Metrics_API_HostAddress = http://localhost:5285
+
+GET {{BMI___Health_Metrics_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

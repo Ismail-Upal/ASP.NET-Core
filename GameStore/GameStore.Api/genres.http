@@ -1,0 +1,3 @@
+@hostAddress = https://app-gamestore-be-dev-westus-01.azurewebsites.net
+
+GET {{hostAddress}}/genres

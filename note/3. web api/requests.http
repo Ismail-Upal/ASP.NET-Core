@@ -1,0 +1,10 @@
+GET http://localhost:5110/products/2
+
+###
+GET http://localhost:5110/report/
+
+###
+GET http://localhost:5110/files/wdrfef
+
+###
+GET http://localhost:5110/search?q=dotnet&page=2

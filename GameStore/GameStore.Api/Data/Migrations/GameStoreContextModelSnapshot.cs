@@ -15,9 +15,9 @@ namespace GameStore.Api.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.1");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
-            modelBuilder.Entity("GameStore.Api.Models.Game", b =>
+            modelBuilder.Entity("GameStore.Api.Entities.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace GameStore.Api.Data.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("GameStore.Api.Models.Genre", b =>
+            modelBuilder.Entity("GameStore.Api.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,11 +56,38 @@ namespace GameStore.Api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Fighting"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Roleplaying"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Sports"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Racing"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Kids and Family"
+                        });
                 });
 
-            modelBuilder.Entity("GameStore.Api.Models.Game", b =>
+            modelBuilder.Entity("GameStore.Api.Entities.Game", b =>
                 {
-                    b.HasOne("GameStore.Api.Models.Genre", "Genre")
+                    b.HasOne("GameStore.Api.Entities.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)

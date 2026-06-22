@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Concurrent;
+using Interfaces;
 using Repositories;
 
 class Program
@@ -85,5 +86,23 @@ class Program
         }
 
         Utility.Exit();
+    }
+}
+
+
+
+
+
+public interface ITicketService
+{
+    void BookTicket(int userId, int scheduleId, int seatNo);
+}
+
+public class TicketService : ITicketService
+{
+    
+    public void BookTicket(int userId, int scheduleId, int seatNo)
+    {
+        
     }
 }

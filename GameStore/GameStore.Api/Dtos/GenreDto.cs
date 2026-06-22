@@ -1,3 +1,3 @@
-namespace GameStore.Api.Dtos;
+﻿namespace GameStore.Api.Dtos;
 
-public record GenreDto(int Id, string Name);
+public record class GenreDto(int Id, string Name);

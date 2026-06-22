@@ -1,0 +1,18 @@
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\serialize & deserialize.exe
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\serialize & deserialize.deps.json
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\serialize & deserialize.runtimeconfig.json
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\serialize & deserialize.dll
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\serialize & deserialize.pdb
+D:\ASP.NET-Core\note\serialize & deserialize\bin\Debug\net10.0\Newtonsoft.Json.dll
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.csproj.AssemblyReference.cache
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.GeneratedMSBuildEditorConfig.editorconfig
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.AssemblyInfoInputs.cache
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.AssemblyInfo.cs
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.csproj.CoreCompileInputs.cache
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.sourcelink.json
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serializ.DB1FFA84.Up2Date
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.dll
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\refint\serialize & deserialize.dll
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.pdb
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\serialize & deserialize.genruntimeconfig.cache
+D:\ASP.NET-Core\note\serialize & deserialize\obj\Debug\net10.0\ref\serialize & deserialize.dll
